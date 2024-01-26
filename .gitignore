@@ -105,12 +105,12 @@ crashlytics-build.properties
 /[Aa]ssets/Plugins/Editor/JetBrains*
 
 # Visual Studio cache directory
-*/.vs/
-.vs/
+*/.vs
+.vs
 
 # Visual Studio user settings
-*/.vsconfig/
-.vsconfig/
+*/.vsconfig
+.vsconfig
 
 # Jetbrain Rider Cache
 */.idea/

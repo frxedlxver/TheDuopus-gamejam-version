@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1197458036842735894}
   - component: {fileID: 7335633903454820910}
   - component: {fileID: 4039187310553999227}
-  - component: {fileID: 6076640379929894260}
+  - component: {fileID: 388290491045173252}
   m_Layer: 0
   m_Name: Harpoon
   m_TagString: Untagged
@@ -94,7 +94,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6194959335829129999}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -113,8 +113,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &6076640379929894260
-BoxCollider2D:
+--- !u!60 &388290491045173252
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -145,7 +145,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.21161008, y: 0.028214931}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0.75, y: 0, z: 0.29999998, w: 0.63}
     pivot: {x: 0.5, y: 0.5}
@@ -155,6 +155,30 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.512486, y: 7.7585526}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.19999999, y: -0.37}
+      - {x: 0.21831751, y: 2.2693665}
+      - {x: 0.39999998, y: 2.11}
+      - {x: 0.47, y: 2.1299999}
+      - {x: 0.47, y: 2.33}
+      - {x: 0.44, y: 2.75}
+      - {x: 0.35999998, y: 3.24}
+      - {x: 0.42999998, y: 3.75}
+      - {x: 0.39, y: 3.8899999}
+      - {x: 0.29999998, y: 3.8899999}
+      - {x: 0.26, y: 3.87}
+      - {x: 0.02, y: 3.29}
+      - {x: 0, y: 2.7}
+      - {x: 0, y: 2.3999999}
+      - {x: 0.04, y: 2.27}
+      - {x: 0.049999997, y: 2.27}
+      - {x: 0.02, y: -0.37}
+      - {x: 0, y: -0.39}
+      - {x: 0, y: -3.8}
+      - {x: 0.02, y: -3.82}
+      - {x: 0.24, y: -3.82}
+      - {x: 0.26, y: -3.8}
+      - {x: 0.26, y: -0.39}
+      - {x: 0.24, y: -0.37}
+  m_UseDelaunayMesh: 0

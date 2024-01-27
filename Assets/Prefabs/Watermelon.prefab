@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8463865564707292918}
   - component: {fileID: 7397062648568238957}
   - component: {fileID: 4977069680327170403}
-  - component: {fileID: 8472110991103912683}
+  - component: {fileID: 2809357982617409122}
   m_Layer: 0
   m_Name: Watermelon
   m_TagString: Untagged
@@ -94,7 +94,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9066876941698068078}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -113,8 +113,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &8472110991103912683
-BoxCollider2D:
+--- !u!60 &2809357982617409122
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -145,7 +145,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.014107227, y: 0.014107227}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 1.3199999, y: 1.7099999, z: 1.35, w: 1.68}
     pivot: {x: 0.5, y: 0.5}
@@ -155,6 +155,32 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.4324627, y: 1.6988811}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.01, y: -0.48}
+      - {x: 1.16, y: -0.37}
+      - {x: 1.17, y: -0.34}
+      - {x: 1.17, y: -0.31}
+      - {x: 0.95, y: -0.07}
+      - {x: 0.71999997, y: 0.13}
+      - {x: 0.5, y: 0.34}
+      - {x: 0.07, y: 0.76}
+      - {x: -0.02, y: 0.83}
+      - {x: -0.14999999, y: 0.83}
+      - {x: -0.22999999, y: 0.76}
+      - {x: -0.35, y: 0.61}
+      - {x: -0.82, y: 0.07}
+      - {x: -1.06, y: -0.19999999}
+      - {x: -1.16, y: -0.32999998}
+      - {x: -1.1899999, y: -0.39999998}
+      - {x: -1.18, y: -0.44}
+      - {x: -1.15, y: -0.48}
+      - {x: -0.87, y: -0.62}
+      - {x: -0.75, y: -0.66999996}
+      - {x: -0.48, y: -0.75}
+      - {x: -0.24, y: -0.78999996}
+      - {x: 0.14, y: -0.78999996}
+      - {x: 0.28, y: -0.78}
+      - {x: 0.59, y: -0.7}
+      - {x: 0.84, y: -0.58}
+  m_UseDelaunayMesh: 0

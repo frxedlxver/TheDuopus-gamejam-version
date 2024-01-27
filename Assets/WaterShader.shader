@@ -22,8 +22,6 @@ Shader "Unlit/WaterShader"
 
         float _WaterTime;
         float _RippleAmount;
-//        float _Frequency = 9.0;
-//        float _Speed = 1.0;
 
         struct VertexInput
         {

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -49,13 +48,11 @@ public class PlayerInput : MonoBehaviour
     private void MoveLeft(InputAction.CallbackContext ctx)
     {
         MoveLeftValue = ctx.ReadValue<Vector2>();
-        Debug.Log(MoveLeftValue);
     }
     
     private void MoveRight(InputAction.CallbackContext ctx)
     {
         MoveRightValue = ctx.ReadValue<Vector2>();
-        Debug.Log(MoveRightValue);
     }
 
     private void SuctionRight(InputAction.CallbackContext ctx)
@@ -63,12 +60,10 @@ public class PlayerInput : MonoBehaviour
         if (ctx.performed)
         {
             SuctionRightHeld = true;
-            Debug.Log("Suction Right Started");
         }
         else if (ctx.canceled)
         {
             SuctionRightHeld = false;
-            Debug.Log("Suction Right Released");
         }
     }
     
@@ -77,12 +72,10 @@ public class PlayerInput : MonoBehaviour
         if (ctx.performed)
         {
             SuctionLeftHeld = true;
-            Debug.Log("Suction Left Started");
         }
         else if (ctx.canceled)
         {
             SuctionLeftHeld = false;
-            Debug.Log("Suction Left Released");
         }
     }
     

@@ -15738,16 +15738,6 @@ ScriptedImporter:
   resliceFromLayer: 0
   mosaicPSDLayers: []
   rigPSDLayers:
-  - name: eyes
-    spriteName: eyes
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 8eb05eeeaad132442abc9d66fc04d8e3
-    layerID: 0
-    mosaicPosition: {x: 4, y: 1534}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
   - name: tentacle copy
     spriteName: tentacle copy
     isGroup: 0
@@ -15755,6 +15745,16 @@ ScriptedImporter:
     spriteID: ff9f11316a1742547b0ce56a4f746dea
     layerID: 244658345
     mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: eyes
+    spriteName: eyes
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 8eb05eeeaad132442abc9d66fc04d8e3
+    layerID: 0
+    mosaicPosition: {x: 4, y: 1534}
     flatten: 0
     isImported: 1
     isVisible: 1

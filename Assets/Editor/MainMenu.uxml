@@ -5,7 +5,7 @@
     </ui:VisualElement>
     <ui:VisualElement name="VisualElement" style="flex-grow: 1; align-self: center; justify-content: space-around; align-items: stretch; flex-direction: column; max-width: 110px; max-height: 200px; -unity-font: url(&apos;project://database/Assets/Fisherman%20FREE.ttf?fileID=12800000&amp;guid=5997a51f9755c5241b2dd680706e56e5&amp;type=3#Fisherman FREE&apos;); -unity-font-style: normal; -unity-font-definition: initial;">
         <ui:VisualElement name="StartButton" style="flex-grow: 1; justify-content: flex-start; align-self: auto; align-items: auto; flex-direction: column; height: auto; max-height: 30px; max-width: 110px;">
-            <ui:Button text="Start Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button" class="button" style="width: 110px; max-width: 110px; justify-content: flex-start; align-self: auto;" />
+            <ui:Button text="Start Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Start" class="button" style="width: 110px; max-width: 110px; justify-content: flex-start; align-self: auto;" />
             <ui:Image name="Octopus" class="visible" style="background-image: resource(&apos;octopus&apos;); height: 51px; width: 69px; position: absolute; top: -13px; left: 49px;" />
         </ui:VisualElement>
         <ui:VisualElement name="SettingsButton" style="flex-grow: 1; max-height: 30px; align-self: auto; align-items: auto; max-width: 110px;">

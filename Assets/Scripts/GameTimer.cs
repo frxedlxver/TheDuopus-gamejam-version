@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,11 +6,31 @@ public class GameTimer : MonoBehaviour
     private float timeElapsed = 0f;
     public Text timerTxt;
 
+    private bool timerEnabled = false;
+
+    public void StartTimer()
+    {
+        timerEnabled = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        timeElapsed += Time.deltaTime;
-        UpdateTimerDisplay();
+        if (timerEnabled)
+        {
+            timeElapsed += Time.deltaTime;
+            UpdateTimerDisplay();
+        }
+    }
+
+    public void StopTimer()
+    {
+        timerEnabled = false;
+    }
+
+    public void ResetTimer()
+    {
+        timeElapsed = 0f;
     }
 
     void UpdateTimerDisplay()

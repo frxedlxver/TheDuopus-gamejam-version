@@ -1,28 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MenuLogic : MonoBehaviour
 {
-    public GameObject mainMenu;
-    public GameObject settingsMenu;
+
+    [SerializeField] private UIDocument mainMenu;
+    [SerializeField] private GameController gameController;
+
+    private Button startBtn;
 
     // Start is called before the first frame update
     void Start()
     {
-        mainMenu.SetActive(true);
-        settingsMenu.SetActive(false);
+        var rootElement = mainMenu.rootVisualElement;
+
+        startBtn = rootElement.Q<Button>("Start");
+        
+        startBtn.clicked += gameController.StartGame;
+        startBtn.clicked += HideMenu;
+        
     }
 
-    public void OpenSettingsMenu()
+    private void HideMenu()
     {
-        mainMenu.SetActive(false);
-        settingsMenu.SetActive(true);
+        var rootElement = mainMenu.rootVisualElement;
+        rootElement.style.display = DisplayStyle.None;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 }

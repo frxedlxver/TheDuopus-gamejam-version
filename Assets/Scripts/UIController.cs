@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class UIController : MonoBehaviour
 {
     public UIDocument uiDocument;
+
     private void Start()
     {
         Getting_Head gettingHeadScript = GetComponent<Getting_Head>();
@@ -15,14 +15,14 @@ public class UIController : MonoBehaviour
 
     private void GameOver()
     {
-        //pause game
+        // Pause game
         Time.timeScale = 0f;
-        
-        //make the leaderboard show up
+
+        // Make the leaderboard show up
         if (uiDocument != null)
         {
-            VisualTreeAsset uiTree = uiDocument.rootVisualElement;
-            uiTree.visible = true;
+            VisualElement uiRoot = uiDocument.rootVisualElement;
+            uiRoot.visible = true;
         }
     }
 }

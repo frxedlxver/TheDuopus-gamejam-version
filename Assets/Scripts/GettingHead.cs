@@ -18,7 +18,20 @@ public class Getting_Head : MonoBehaviour
     {
         if (other.CompareTag("ManTrigger"))
         {
-            //Switch Sprite for Man
+            // Get the parent GameObject of the collider
+            Transform parentTransform = other.transform.parent;
+            SpriteChanger changeSpriteScript = parentTransform.GetComponent<SpriteChanger>();
+            
+            if (changeSpriteScript )
+            {
+                changeSpriteScript.ChangeSpriteToNewSprite();
+            }
+            else
+            {
+                Debug.LogError("SpriteChanger script component not found on the parent GameObject.");
+            }
+            
+            Time.timeScale = 0f;
             
             //Show timer leaderboard
         }

@@ -8,8 +8,8 @@
             <ui:Button text="Start Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button" class="button" style="width: 110px; max-width: 110px; justify-content: flex-start; align-self: auto;" />
             <ui:Image name="Octopus" class="visible" style="background-image: resource(&apos;octopus&apos;); height: 51px; width: 69px; position: absolute; top: -13px; left: 49px;" />
         </ui:VisualElement>
-        <ui:VisualElement name="SettingsButton" style="flex-grow: 1; max-height: 30px; align-self: auto; align-items: auto; max-width: 110px;">
-            <ui:Button text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button" class="button" style="align-self: flex-end; -unity-text-align: middle-center; max-width: 110px; width: 110px; align-items: stretch; justify-content: space-between; white-space: normal; text-overflow: ellipsis;" />
+        <ui:VisualElement name="CreditsButton" style="flex-grow: 1; max-height: 30px; align-self: auto; align-items: auto; max-width: 110px;">
+            <ui:Button text="Credits" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button" class="button" style="align-self: flex-end; -unity-text-align: middle-center; max-width: 110px; width: 110px; align-items: stretch; justify-content: space-between; white-space: normal; text-overflow: ellipsis;" />
             <ui:Image name="Octopus" class="visible" style="background-image: resource(&apos;octopus&apos;); height: 51px; width: 69px; position: absolute; top: -13px; left: 49px;" />
         </ui:VisualElement>
         <ui:VisualElement name="ExitButton" style="flex-grow: 1; align-items: auto; justify-content: center; align-self: auto; flex-direction: column; flex-shrink: 1; max-height: 30px; max-width: 110px;">

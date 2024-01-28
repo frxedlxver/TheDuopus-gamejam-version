@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Getting_Head : MonoBehaviour
 {
@@ -13,7 +14,11 @@ public class Getting_Head : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // Invoke the gameOverEvent
+            gameOverEvent.Invoke();
+        }
     }
     
     private void OnTriggerEnter(Collider other)

@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public Sucker R_sucker;
     private Vector2 R_suckerPos;
     private bool R_sucked;
+    public float forceFactor = 10f;
+    public float maxForce = 50f;
 
     private SpriteRenderer L_suckerIndicator;
     private SpriteRenderer R_suckerIndicator;
@@ -60,12 +62,12 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_input.SuctionLeftHeld && L_sucker.IsSucking)
+        if (_input.SuctionLeftHeld && L_sucker.CanSuck)
         {
             if (L_sucked)
             {
                 L_sucker.transform.position = L_suckerPos;
-                ApplyForceToBody(_input.MoveLeftValue);
+
             } else
             {
                 L_suckerPos = L_sucker.transform.position;
@@ -73,22 +75,42 @@ public class PlayerController : MonoBehaviour
             }
         } else
         {
+            L_sucked = false;
             PlaceTip(_input.MoveLeftValue, tipL, baseL, leftRb);
         }
 
-        if (_input.SuctionRightHeld && L_sucker.IsSucking)
+        if (_input.SuctionRightHeld && R_sucker.CanSuck)
         {
-            L_suckerPos = L_sucker.transform.position;
+            if (R_sucked)
+            {
+                R_sucker.transform.position = R_suckerPos;
+
+            }
+            else
+            {
+                R_suckerPos = R_sucker.transform.position;
+                R_sucked = true;
+            }
         } else
         {
+            R_sucked = false;
             PlaceTip(_input.MoveRightValue, tipR, baseR, rightRb);
         }
-        
-        
-    }
 
-    private void ApplyForceToBody()
-    {
+
+        if ((R_sucked && _input.MoveLeftValue != Vector2.zero) || L_sucked && _input.MoveRightValue != Vector2.zero)
+        {
+            Vector2 headTargetPos = (R_sucker.transform.position + L_sucker.transform.position) / 2;
+            Vector2 forceDirection = headTargetPos - centerRb.position;
+            float distance = forceDirection.magnitude;
+
+            // Scale the force based on distance (with damping and force limit)
+            float forceScale = Mathf.Min(distance * forceFactor, maxForce);
+            forceDirection = forceDirection.normalized * forceScale;
+
+            centerRb.AddForce(forceDirection);
+
+        }
     }
 
     public void PlaceTip(Vector2 input, Transform tip, Transform baseT, Rigidbody2D rb)
@@ -107,9 +129,6 @@ public class PlayerController : MonoBehaviour
         {
             rb.gravityScale = 0;
             curOffset = input * range;
-
-            Debug.Log(range);
-            Debug.Log(curOffset);
         }
 
         rb.position = (Vector2)(baseT.position) + Vector2.ClampMagnitude(curOffset, range);

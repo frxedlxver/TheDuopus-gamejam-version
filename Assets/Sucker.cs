@@ -4,13 +4,28 @@ using UnityEngine;
 
 public class Sucker : MonoBehaviour
 {
-    public bool IsSucking { get; private set; }
+
+    private Vector3 lockedLocalPos;
+    public bool CanSuck { get; private set; }
+
+    public void Start()
+    {
+        this.lockedLocalPos = this.transform.localPosition;
+    }
+
+    public void Update()
+    {
+        if (this.transform.localPosition != lockedLocalPos)
+        {
+            this.transform.localPosition = lockedLocalPos;
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("terrain"))
         {
-            IsSucking = true;
+            CanSuck = true;
         }
     }
 
@@ -18,7 +33,7 @@ public class Sucker : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("terrain"))
         {
-            IsSucking = false;
+            CanSuck = false;
         }
     }
 }

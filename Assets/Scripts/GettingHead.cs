@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Getting_Head : MonoBehaviour
 {
+    public UnityEvent gameOverEvent = new UnityEvent();
+    
     void Start()
     {
         
@@ -30,9 +32,8 @@ public class Getting_Head : MonoBehaviour
                 Debug.LogError("SpriteChanger script component not found on the parent GameObject.");
             }
             
-            Time.timeScale = 0f;
-            
-            //Show timer leaderboard
+            //pause the game and show the timer leaderboard
+            gameOverEvent.Invoke();
         }
     }
 }

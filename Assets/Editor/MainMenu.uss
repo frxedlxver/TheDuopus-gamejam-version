@@ -1,5 +1,16 @@
-.custom-label {
-    font-size: 20px;
-    -unity-font-style: bold;
-    color: rgb(68, 138, 255);
+.button {
+    background-color: #1A1A9F;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    opacity: 0.75;
+
+}
+
+.button:focus {
+    background-color: #0077be; /* Ocean Blue */
+    opacity: 0.75;
 }

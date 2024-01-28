@@ -82,6 +82,10 @@ Shader "Unlit/WaterShader"
                 float colorVariance = 0.05; 
                 float3 color = baseTex.r + wave * colorVariance;
 
+                // Set a maximum brightness threshold
+                float maxBrightness = 0.5;
+                color = min(color, maxBrightness);
+
                 return float4(color, baseTex.b) * _BaseColor;
             }
                 

@@ -1,21 +1,22 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Editor/Settings.uss?fileID=7433441132597879392&amp;guid=f161a2d2abaa55640be05cce2d5d2e0d&amp;type=3#Settings" />
+    <Style src="project://database/Assets/Editor/MainMenu.uss?fileID=7433441132597879392&amp;guid=2c90cdc5eb37c5c4b9a890698bd845ae&amp;type=3#MainMenu" />
     <ui:VisualElement name="VisualElement" style="align-items: center; justify-content: space-around; align-self: center;">
-        <ui:Label tabindex="-1" text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+        <ui:Label tabindex="-1" text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 36px; -unity-font: url(&apos;project://database/Assets/Fisherman%20FREE.ttf?fileID=12800000&amp;guid=5997a51f9755c5241b2dd680706e56e5&amp;type=3#Fisherman FREE&apos;); -unity-font-definition: initial; color: rgb(255, 255, 255);" />
     </ui:VisualElement>
     <ui:VisualElement style="flex-grow: 1; align-items: stretch; justify-content: space-around;">
         <ui:VisualElement name="VisualElement">
-            <ui:SliderInt picking-mode="Ignore" label="Overall Volume" value="42" high-value="100" />
+            <ui:SliderInt picking-mode="Ignore" label="Overall Volume" value="42" high-value="100" style="-unity-font: url(&apos;project://database/Assets/Fisherman%20FREE.ttf?fileID=12800000&amp;guid=5997a51f9755c5241b2dd680706e56e5&amp;type=3#Fisherman FREE&apos;); -unity-font-definition: initial; color: rgb(255, 255, 255);" />
         </ui:VisualElement>
         <ui:VisualElement name="VisualElement">
-            <ui:SliderInt picking-mode="Ignore" label="Music" value="42" high-value="100" />
+            <ui:SliderInt picking-mode="Ignore" label="Music" value="42" high-value="100" style="-unity-font-definition: initial; -unity-font: url(&apos;project://database/Assets/Fisherman%20FREE.ttf?fileID=12800000&amp;guid=5997a51f9755c5241b2dd680706e56e5&amp;type=3#Fisherman FREE&apos;); color: rgb(255, 255, 255);" />
         </ui:VisualElement>
         <ui:VisualElement>
-            <ui:SliderInt picking-mode="Ignore" label="Sound Effects" value="42" high-value="100" />
+            <ui:SliderInt picking-mode="Ignore" label="Sound Effects" value="42" high-value="100" style="-unity-font: url(&apos;project://database/Assets/Fisherman%20FREE.ttf?fileID=12800000&amp;guid=5997a51f9755c5241b2dd680706e56e5&amp;type=3#Fisherman FREE&apos;); -unity-font-definition: initial; color: rgb(255, 255, 255);" />
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="VisualElement" style="align-items: flex-end; justify-content: space-around; flex-direction: row; align-self: stretch;">
-        <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" />
-        <ui:Button text="Save" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+        <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" style="-unity-font: url(&apos;project://database/Assets/Fisherman%20FREE.ttf?fileID=12800000&amp;guid=5997a51f9755c5241b2dd680706e56e5&amp;type=3#Fisherman FREE&apos;); -unity-font-definition: initial;" />
+        <ui:Button text="Save" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" style="-unity-font: url(&apos;project://database/Assets/Fisherman%20FREE.ttf?fileID=12800000&amp;guid=5997a51f9755c5241b2dd680706e56e5&amp;type=3#Fisherman FREE&apos;); -unity-font-definition: initial;" />
     </ui:VisualElement>
 </ui:UXML>

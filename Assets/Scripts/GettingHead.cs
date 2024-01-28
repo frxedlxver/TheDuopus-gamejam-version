@@ -18,7 +18,6 @@ public class Getting_Head : MonoBehaviour
     {
         if (other.CompareTag("ManTrigger"))
         {
-            // Get the parent GameObject of the collider
             Transform parentTransform = other.transform.parent;
             SpriteChanger changeSpriteScript = parentTransform.GetComponent<SpriteChanger>();
             

@@ -45,3 +45,9 @@ TagManager:
   - name: fx
     uniqueID: 975192767
     locked: 0
+  - name: terrain
+    uniqueID: 3580478349
+    locked: 0
+  - name: junk
+    uniqueID: 4007517071
+    locked: 0

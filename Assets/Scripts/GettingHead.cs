@@ -12,10 +12,6 @@ public class Getting_Head : MonoBehaviour
         
     }
 
-    void Update()
-    {
-        
-    }
     
     private void OnTriggerEnter(Collider other)
     {

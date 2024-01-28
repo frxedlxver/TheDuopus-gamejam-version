@@ -18,6 +18,7 @@ public class Getting_Head : MonoBehaviour
     {
         if (other.CompareTag("ManTrigger"))
         {
+            // change the man's sprite to show that his head has returned
             Transform parentTransform = other.transform.parent;
             SpriteChanger changeSpriteScript = parentTransform.GetComponent<SpriteChanger>();
             
@@ -30,6 +31,7 @@ public class Getting_Head : MonoBehaviour
                 Debug.LogError("SpriteChanger script component not found on the parent GameObject.");
             }
             
+            // pause the game
             Time.timeScale = 0f;
             
             //Show timer leaderboard

@@ -1007,6 +1007,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 500007982}
     m_Modifications:
+    - target: {fileID: 2382049245127406116, guid: 265f01137e7d04caebd743f4e22ce1d0, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6615316624539901808, guid: 265f01137e7d04caebd743f4e22ce1d0, type: 3}
       propertyPath: m_Name
       value: Anchor (1)
@@ -6056,8 +6060,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1515086201}
-  smoothSpeed: 1
-  offset: {x: 0, y: 20, z: 0}
+  smoothSpeed: 0.125
+  offset: {x: 0, y: 20, z: -10}
 --- !u!1001 &1168244512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8068,7 +8072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3036142457891575962, guid: 7c59763dbc61206419478f2c45369f55, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 3036142457891575962, guid: 7c59763dbc61206419478f2c45369f55, type: 3}
       propertyPath: m_LocalRotation.w

@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Editor/MainMenu.uss?fileID=7433441132597879392&amp;guid=2c90cdc5eb37c5c4b9a890698bd845ae&amp;type=3#MainMenu" />
     <ui:VisualElement name="Title" style="flex-grow: 1; align-self: center; justify-content: space-between; align-items: center; flex-direction: row; height: auto; max-height: 200px;">
-        <ui:Image name="Image" style="background-image: resource(&apos;wordart&apos;); height: 84px; width: 218px;" />
+        <ui:Image name="Image" style="background-image: resource(&apos;duopus&apos;); height: 84px; width: 218px;" />
     </ui:VisualElement>
     <ui:VisualElement name="VisualElement" style="flex-grow: 1; align-self: center; justify-content: space-around; align-items: stretch; flex-direction: column; max-width: 110px; max-height: 200px; -unity-font: url(&apos;project://database/Assets/Fisherman%20FREE.ttf?fileID=12800000&amp;guid=5997a51f9755c5241b2dd680706e56e5&amp;type=3#Fisherman FREE&apos;); -unity-font-style: normal; -unity-font-definition: initial;">
         <ui:VisualElement name="StartButton" style="flex-grow: 1; justify-content: flex-start; align-self: auto; align-items: auto; flex-direction: column; height: auto; max-height: 30px; max-width: 110px;">

@@ -20,7 +20,7 @@ public class SpriteChanger : MonoBehaviour
         }
     }
 
-    void ChangeSpriteToNewSprite()
+    public void ChangeSpriteToNewSprite()
     {
         // Check if the newSprite is assigned
         if (newSprite != null)

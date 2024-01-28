@@ -23,81 +23,31 @@ public class PlayerController : MonoBehaviour
     public float headForceFactor = 10f;
     public float maxHeadForce = 50f;
     public float tentacleForce = 50f;
-
-    private SpriteRenderer L_suckerIndicator;
-    private SpriteRenderer R_suckerIndicator;
-
     public float range = 10f;
+
+    public float staminaSeconds = 10f;
+
+
     public Transform tipL;
     public Transform baseL;
     public Transform tipR;
     public Transform baseR;
 
-    private Vector2 L_lastTipOffset;
-    private Vector2 R_lastTipOffset;
 
     public float tentacleGravity = 6f;
-    public float bodyGravity = 8f;
+    public float headGravity = 8f;
 
     private void Start()
     {
         _input = gameObject.GetComponent<PlayerInput>();
-        if (_input == null)
-        {
-            Debug.LogWarning("Player object is missing PlayerInput component.");
-        }
-        if (!leftRb)
-        {
-            Debug.LogWarning("Missing reference to left RB");
-        }
-        if (!rightRb)
-        {
-            Debug.LogWarning("Missing reference to right RB");
-        }
-        if (!centerRb)
-        {
-            Debug.LogWarning("Missing reference to center RB");
-        }
-        
+        L_sucker.maxStamina = staminaSeconds;
+        R_sucker.maxStamina = staminaSeconds;
     }
 
     private void FixedUpdate()
     {
-        if (_input.SuctionLeftHeld && L_sucker.CanSuck)
-        {
-            if (L_sucked)
-            {
-                L_sucker.transform.position = L_suckerPos;
-
-            } else
-            {
-                L_suckerPos = L_sucker.transform.position;
-                L_sucked = true;
-            }
-        } else
-        {
-            L_sucked = false;
-            PlaceTip(_input.MoveLeftValue, tipL, baseL, leftRb);
-        }
-
-        if (_input.SuctionRightHeld && R_sucker.CanSuck)
-        {
-            if (R_sucked)
-            {
-                R_sucker.transform.position = R_suckerPos;
-
-            }
-            else
-            {
-                R_suckerPos = R_sucker.transform.position;
-                R_sucked = true;
-            }
-        } else
-        {
-            R_sucked = false;
-            PlaceTip(_input.MoveRightValue, tipR, baseR, rightRb);
-        }
-
+        HandleSucker(_input.SuctionLeftHeld, L_sucker, _input.MoveLeftValue, tipL, baseL, leftRb, ref L_suckerPos, ref L_sucked);
+        HandleSucker(_input.SuctionRightHeld, R_sucker, _input.MoveRightValue, tipR, baseR, rightRb, ref R_suckerPos, ref R_sucked);
 
         if ((R_sucked && _input.MoveLeftValue != Vector2.zero) || L_sucked && _input.MoveRightValue != Vector2.zero)
         {
@@ -111,16 +61,37 @@ public class PlayerController : MonoBehaviour
             forceDirection = forceDirection.normalized * forceScale;
 
             centerRb.AddForce(forceDirection);
-
         } else
         {
-            centerRb.gravityScale = bodyGravity;
+            centerRb.gravityScale = headGravity;
+        }
+    }
+
+    private void HandleSucker(bool suctionHeld, Sucker sucker, Vector2 moveValue, Transform tip, Transform baseT, Rigidbody2D rb, ref Vector2 suckerPos, ref bool sucked)
+    {
+        if (suctionHeld && sucker.CanSuck)
+        {
+            if (sucked)
+            {
+                sucker.transform.position = suckerPos;
+            }
+            else
+            {
+                suckerPos = sucker.transform.position;
+                sucker.Suck();
+                sucked = true;
+            }
+        }
+        else
+        {
+            sucked = false;
+            sucker.StopSucking();
+            PlaceTip(moveValue, tip, baseT, rb);
         }
     }
 
     public void PlaceTip(Vector2 input, Transform tip, Transform baseT, Rigidbody2D rb)
     {
-        Vector2 curOffset = (rb.position - (Vector2)baseT.position);
 
         if (input == Vector2.zero)
         {

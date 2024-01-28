@@ -1,6 +1,7 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class UIController : MonoBehaviour
 {
@@ -21,8 +22,8 @@ public class UIController : MonoBehaviour
         //make the leaderboard show up
         if (uiDocument != null)
         {
-            VisualTreeAsset uiTree = uiDocument.rootVisualElement;
+            VisualElement uiTree = uiDocument.rootVisualElement;
             uiTree.visible = true;
         }
     }
-}
+}*/

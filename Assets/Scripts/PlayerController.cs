@@ -20,8 +20,9 @@ public class PlayerController : MonoBehaviour
     public Sucker R_sucker;
     private Vector2 R_suckerPos;
     private bool R_sucked;
-    public float forceFactor = 10f;
-    public float maxForce = 50f;
+    public float headForceFactor = 10f;
+    public float maxHeadForce = 50f;
+    public float tentacleForce = 50f;
 
     private SpriteRenderer L_suckerIndicator;
     private SpriteRenderer R_suckerIndicator;
@@ -100,40 +101,42 @@ public class PlayerController : MonoBehaviour
 
         if ((R_sucked && _input.MoveLeftValue != Vector2.zero) || L_sucked && _input.MoveRightValue != Vector2.zero)
         {
+            centerRb.gravityScale = 0;
             Vector2 headTargetPos = (R_sucker.transform.position + L_sucker.transform.position) / 2;
             Vector2 forceDirection = headTargetPos - centerRb.position;
             float distance = forceDirection.magnitude;
 
             // Scale the force based on distance (with damping and force limit)
-            float forceScale = Mathf.Min(distance * forceFactor, maxForce);
+            float forceScale = Mathf.Min(distance * headForceFactor, maxHeadForce);
             forceDirection = forceDirection.normalized * forceScale;
 
             centerRb.AddForce(forceDirection);
 
+        } else
+        {
+            centerRb.gravityScale = bodyGravity;
         }
     }
 
     public void PlaceTip(Vector2 input, Transform tip, Transform baseT, Rigidbody2D rb)
     {
-        Vector2 curOffset = (rb.position - (Vector2) baseT.position);
-
-        Debug.Log(curOffset);
-
-
+        Vector2 curOffset = (rb.position - (Vector2)baseT.position);
 
         if (input == Vector2.zero)
-        {   
+        {
             rb.gravityScale = tentacleGravity;
         }
         else
         {
             rb.gravityScale = 0;
-            curOffset = input * range;
+            Vector2 targetOffset = input * range;
+            Vector2 targetPosition = (Vector2)baseT.position + targetOffset;
+            Vector2 forceDirection = targetPosition - rb.position;
+
+            // Apply a force towards the target position
+            rb.AddForce(forceDirection.normalized * tentacleForce, ForceMode2D.Force);
         }
-
-        rb.position = (Vector2)(baseT.position) + Vector2.ClampMagnitude(curOffset, range);
-
     }
-    
+
 
 }

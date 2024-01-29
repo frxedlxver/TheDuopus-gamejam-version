@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
             Vector2 newPosition = Vector2.MoveTowards(centerRb.position, headTargetPos, maxHeadForce * Time.fixedDeltaTime);
 
             centerRb.MovePosition(newPosition);
-            Debug.Log("Moving head");
         }
         else
         {
@@ -65,14 +64,12 @@ public class PlayerController : MonoBehaviour
         if (suctionHeld && sucker.CanSuck && !sucked)
         {
             sucked = true;
-            Debug.Log("Sucking");
         }
 
         if (!suctionHeld)
         {
             if (sucked)
             {
-                Debug.Log("Stop sucking");
             }
             sucked = false;
         }

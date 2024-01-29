@@ -11,7 +11,7 @@ public class Sucker : MonoBehaviour
     private bool touchingSuckable;
     public bool CanSuck
     {
-        get { return touchingSuckable && curStamina > 0; }
+        get { return touchingSuckable; }
     }
     public float maxStamina;
     public float curStamina { get; private set; }
@@ -23,36 +23,28 @@ public class Sucker : MonoBehaviour
 
     public void Update()
     {
-        if (Sucking)
-        {
-            curStamina = curStamina - Time.deltaTime;
-        } 
-        else
-        {
-            curStamina = Mathf.Max(curStamina + Time.deltaTime, maxStamina);
-        }
 
-        Debug.Log(this.gameObject.name + " stamina: " + curStamina.ToString());
         if (this.transform.localPosition != lockedLocalPos)
         {
             this.transform.localPosition = lockedLocalPos;
         }
     }
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        sprite.enabled = true;
         if (collision.gameObject.layer == LayerMask.NameToLayer("terrain"))
         {
+            
             touchingSuckable = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        sprite.enabled = false;
+        
         if (collision.gameObject.layer == LayerMask.NameToLayer("terrain"))
         {
+            
             touchingSuckable = false;
         }
     }
@@ -60,12 +52,12 @@ public class Sucker : MonoBehaviour
     public void Suck()
     {
         Sucking = true;
-        sprite.color = new Color(c.r, c.g, c.b, 1);
+        sprite.enabled = true;
     }
 
     public void StopSucking()
     {
         Sucking = false;
-        sprite.color = new Color(c.r, c.g, c.b, 0.15f);
+        sprite.enabled = false;
     }
 }

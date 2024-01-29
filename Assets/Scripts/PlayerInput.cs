@@ -59,10 +59,12 @@ public class PlayerInput : MonoBehaviour
     {
         if (ctx.performed)
         {
+            Debug.Log("right held");
             SuctionRightHeld = true;
         }
         else if (ctx.canceled)
         {
+            Debug.Log("right released");
             SuctionRightHeld = false;
         }
     }
@@ -71,6 +73,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (ctx.performed)
         {
+            Debug.Log("left held");
             SuctionLeftHeld = true;
         }
         else if (ctx.canceled)

@@ -33,7 +33,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""id"": ""d0d88984-ccae-4f64-bc94-2a14783a9440"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -42,7 +42,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""id"": ""4a496ccf-7558-4f89-9c77-20a5df1c0f9b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -80,7 +80,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""4547a612-cfd3-4fe4-b621-755420362a6c"",
                     ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": ""Hold(duration=1.401298E-45)"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SuctionRight"",

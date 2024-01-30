@@ -12,7 +12,7 @@ public class MovingPlatformEditorControl : MonoBehaviour
     [ExecuteInEditMode]
     void Update()
     {
-        if (Application.isEditor)
+        if (!Application.isPlaying)
         {
             Vector3 platformPosition = movingPlatform.Platform.transform.position;
             Vector3 firstPointPosition = movingPlatform.Path.pathPoints[0].transform.position;

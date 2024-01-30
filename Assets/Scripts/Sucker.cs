@@ -7,14 +7,17 @@ public class Sucker : MonoBehaviour
     private SpriteRenderer sprite;
     public Color c;
 
+    public Sucker OtherSucker;
+    public bool JustStartedSucking { get { return framesSinceStartedSucking < 3;  } }
+    private int framesSinceStartedSucking = 0;
+
     public bool Sucking { get; private set; }
     private bool touchingSuckable;
+    public GameObject touchedSuckable;
     public bool CanSuck
     {
         get { return touchingSuckable; }
     }
-    public float maxStamina;
-    public float curStamina { get; private set; }
     public void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -23,10 +26,16 @@ public class Sucker : MonoBehaviour
 
     public void Update()
     {
-
         if (this.transform.localPosition != lockedLocalPos)
         {
             this.transform.localPosition = lockedLocalPos;
+        }
+    }
+
+    public void FixedUpdate() {
+        if (framesSinceStartedSucking < 3 )
+        {
+            framesSinceStartedSucking++;
         }
     }
     
@@ -34,7 +43,7 @@ public class Sucker : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("terrain"))
         {
-            
+            touchedSuckable = collision.gameObject;
             touchingSuckable = true;
         }
     }
@@ -42,15 +51,16 @@ public class Sucker : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         
-        if (collision.gameObject.layer == LayerMask.NameToLayer("terrain"))
+        if (touchedSuckable != null && collision.gameObject == touchedSuckable)
         {
-            
+            touchedSuckable = null;
             touchingSuckable = false;
         }
     }
 
     public void Suck()
     {
+        framesSinceStartedSucking = 0;
         Sucking = true;
         sprite.enabled = true;
     }

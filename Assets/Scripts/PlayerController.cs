@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public float maxHeadForce = 50f;
     public float tentacleForce = 50f;
     public float range = 10f;
+    public float suctionBreakDistance = 0.5f;
 
     public float staminaSeconds = 10f;
 
@@ -36,14 +37,14 @@ public class PlayerController : MonoBehaviour
     public void Start()
     {
         _input = gameObject.GetComponent<PlayerInput>();
-        L_sucker.maxStamina = staminaSeconds;
-        R_sucker.maxStamina = staminaSeconds;
+        L_sucker.OtherSucker = R_sucker;
+        R_sucker.OtherSucker = L_sucker;
     }
 
     public void FixedUpdate()
     {
-        HandleSucker(_input.SuctionLeftHeld, L_sucker, L_effector, _input.MoveLeftValue, tipL, baseL, leftRb, ref L_suckerPos, ref L_sucked);
-        HandleSucker(_input.SuctionRightHeld, R_sucker, R_effector, _input.MoveRightValue, tipR, baseR, rightRb, ref R_suckerPos, ref R_sucked);
+        HandleSucker(_input.SuctionLeftHeld, _input.SuctionLeftPressed, L_sucker, L_effector, _input.MoveLeftValue, tipL, baseL, leftRb, ref L_suckerPos, ref L_sucked);
+        HandleSucker(_input.SuctionRightHeld, _input.SuctionRightPressed, R_sucker, R_effector, _input.MoveRightValue, tipR, baseR, rightRb, ref R_suckerPos, ref R_sucked);
 
         if ((R_sucked && _input.MoveLeftValue != Vector2.zero) || (L_sucked && _input.MoveRightValue != Vector2.zero))
         {
@@ -59,36 +60,53 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void HandleSucker(bool suctionHeld, Sucker sucker, Transform effector, Vector2 moveValue, Transform target, Transform baseT, Rigidbody2D rb, ref Vector2 suckerPos, ref bool sucked)
+    public void HandleSucker(bool suctionHeld, bool suctionPressed, Sucker sucker, Transform effector, Vector2 moveValue, Transform target, Transform baseT, Rigidbody2D rb, ref Vector2 lockedPosition, ref bool sucked)
     {
-        if (suctionHeld && sucker.CanSuck && !sucked)
+        if (suctionPressed && sucker.CanSuck && !sucked)
         {
-            sucked = true;
-        }
-
-        if (!suctionHeld)
-        {
-            if (sucked)
+            GameObject touchedSuckable = sucker.touchedSuckable;
+            if (touchedSuckable != null)
             {
+                sucked = true;
+                sucker.Suck();
+                // Calculate the position of the sucker, local to touchedSuckable
+                lockedPosition = touchedSuckable.transform.InverseTransformPoint(sucker.transform.position);
             }
-            sucked = false;
         }
 
-        if (sucked) {
-            sucker.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
-            target.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
-            effector.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
-            sucker.Suck();
+        if (sucked)
+        { 
+            GameObject touchedSuckable = sucker.touchedSuckable;
+            if (touchedSuckable != null)
+            {
+                // Calculate the current world position of the locked position
+                Vector2 currentLockedWorldPosition = touchedSuckable.transform.TransformPoint(lockedPosition);
+                bool maxSuctionDistanceExceeded = Vector2.Distance(sucker.transform.position, currentLockedWorldPosition) > suctionBreakDistance;
+
+                if (sucker.OtherSucker.JustStartedSucking || maxSuctionDistanceExceeded || !suctionHeld)
+                {
+                    sucked = false;
+                    sucker.StopSucking();
+                }
+                else
+                {
+                    // Move the sucker towards the current world position of the locked position
+                    rb.MovePosition(currentLockedWorldPosition);
+                }
+            } else
+            {
+                sucked = false;
+                sucker.StopSucking();
+            }
+
         }
-        else
+
+        if (!sucked)
         {
-            sucker.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-            target.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-            effector.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-            sucker.StopSucking();
             PlaceTip(moveValue, target, baseT, rb);
         }
     }
+
 
     public void PlaceTip(Vector2 input, Transform tip, Transform baseT, Rigidbody2D rb)
     {

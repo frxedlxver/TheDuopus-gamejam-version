@@ -688,15 +688,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1299009536391903610, guid: 071650a74ee304f959fb023fc6044dd2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.35
+      value: 1.14
       objectReference: {fileID: 0}
     - target: {fileID: 1299009536391903610, guid: 071650a74ee304f959fb023fc6044dd2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1887804
+      value: 1.0038589
       objectReference: {fileID: 0}
     - target: {fileID: 1299009536391903610, guid: 071650a74ee304f959fb023fc6044dd2, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4.0125275
+      value: 3.3883562
       objectReference: {fileID: 0}
     - target: {fileID: 1299009536391903610, guid: 071650a74ee304f959fb023fc6044dd2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13028,7 +13028,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 100}
-  m_LocalScale: {x: 7.67, y: 7.67, z: 7.67}
+  m_LocalScale: {x: 11.5, y: 11.5, z: 11.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1989134701}
@@ -14607,7 +14607,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingPlatform: {fileID: 945018872}
-  LockPositionToFirstPoint: 0
 --- !u!114 &945018872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15005,7 +15004,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 40
+  orthographic size: 60
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -19056,6 +19055,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3194602458244177368, guid: 7c59763dbc61206419478f2c45369f55, type: 3}
+      propertyPath: m_Radius
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3395866006684069196, guid: 7c59763dbc61206419478f2c45369f55, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.99732876
@@ -19124,6 +19127,10 @@ PrefabInstance:
       propertyPath: headForceFactor
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 4304422343090672015, guid: 7c59763dbc61206419478f2c45369f55, type: 3}
+      propertyPath: suctionBreakDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4389174281402188254, guid: 7c59763dbc61206419478f2c45369f55, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9454012
@@ -19156,6 +19163,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.45662624
       objectReference: {fileID: 0}
+    - target: {fileID: 4731067702046492260, guid: 7c59763dbc61206419478f2c45369f55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1793461589, guid: 113a302aa22478b47b352e5c511583c5, type: 3}
     - target: {fileID: 4768428924856608722, guid: 7c59763dbc61206419478f2c45369f55, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
@@ -19280,6 +19291,10 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7968672102822134462, guid: 7c59763dbc61206419478f2c45369f55, type: 3}
+      propertyPath: m_Radius
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8023559076869934235, guid: 7c59763dbc61206419478f2c45369f55, type: 3}
       propertyPath: m_Radius
       value: 0.5
@@ -19320,6 +19335,10 @@ PrefabInstance:
       propertyPath: m_FlipY
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8207246932953864213, guid: 7c59763dbc61206419478f2c45369f55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1793461589, guid: 113a302aa22478b47b352e5c511583c5, type: 3}
     - target: {fileID: 8238673452091806456, guid: 7c59763dbc61206419478f2c45369f55, type: 3}
       propertyPath: m_Offset.x
       value: 0

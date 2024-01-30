@@ -9,6 +9,8 @@ public class PlayerInput : MonoBehaviour
     public Vector2 MoveRightValue { get; private set; } = Vector2.zero;
     public bool SuctionLeftHeld { get; private set; }
     public bool SuctionRightHeld { get; private set; }
+    public bool SuctionLeftPressed { get; private set; }
+    public bool SuctionRightPressed { get; private set; }
 
     private void OnEnable()
     {
@@ -20,9 +22,11 @@ public class PlayerInput : MonoBehaviour
         _input.gameplay.MoveRight.performed += MoveRight;
         _input.gameplay.MoveRight.canceled += MoveRight;
 
+        _input.gameplay.SuctionLeft.started += SuctionLeft;
         _input.gameplay.SuctionLeft.performed += SuctionLeft;
         _input.gameplay.SuctionLeft.canceled += SuctionLeft;
         
+        _input.gameplay.SuctionRight.started += SuctionRight;
         _input.gameplay.SuctionRight.performed += SuctionRight;
         _input.gameplay.SuctionRight.canceled += SuctionRight;
     }
@@ -36,9 +40,12 @@ public class PlayerInput : MonoBehaviour
         _input.gameplay.MoveRight.performed -= MoveRight;
         _input.gameplay.MoveRight.canceled -= MoveRight;
 
+
+        _input.gameplay.SuctionLeft.started -= SuctionLeft;
         _input.gameplay.SuctionLeft.performed -= SuctionLeft;
         _input.gameplay.SuctionLeft.canceled -= SuctionLeft;
         
+        _input.gameplay.SuctionRight.started -= SuctionRight;
         _input.gameplay.SuctionRight.performed -= SuctionRight;
         _input.gameplay.SuctionRight.canceled -= SuctionRight;
         
@@ -57,27 +64,44 @@ public class PlayerInput : MonoBehaviour
 
     private void SuctionRight(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (ctx.started)
+        {
+            Debug.Log("right pressed");
+            SuctionRightPressed = true;
+            SuctionRightHeld = true;
+        }
+        else if (ctx.performed)
         {
             Debug.Log("right held");
+            SuctionRightPressed = false;
             SuctionRightHeld = true;
         }
         else if (ctx.canceled)
         {
             Debug.Log("right released");
+            SuctionRightPressed = false;
             SuctionRightHeld = false;
         }
     }
-    
+
     private void SuctionLeft(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (ctx.started)
         {
-            Debug.Log("left held");
+            Debug.Log("Left pressed");
+            SuctionLeftPressed = true;
+            SuctionLeftHeld = true;
+        }
+        else if (ctx.performed)
+        {
+            Debug.Log("Left held");
+            SuctionLeftPressed = false;
             SuctionLeftHeld = true;
         }
         else if (ctx.canceled)
         {
+            Debug.Log("Left released");
+            SuctionLeftPressed = false;
             SuctionLeftHeld = false;
         }
     }

@@ -17110,7 +17110,7 @@ GameObject:
   - component: {fileID: 1740911994}
   - component: {fileID: 1740911997}
   m_Layer: 10
-  m_Name: Fish
+  m_Name: Maurice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -28,22 +28,22 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             ""id"": ""556b83be-37c8-40cc-bc9f-f1f09188276b"",
             ""actions"": [
                 {
-                    ""name"": ""SuctionLeft"",
-                    ""type"": ""Button"",
+                    ""name"": ""SuctionLeftHold"",
+                    ""type"": ""Value"",
                     ""id"": ""d0d88984-ccae-4f64-bc94-2a14783a9440"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""interactions"": ""Hold(pressPoint=0.01)"",
+                    ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""SuctionRight"",
-                    ""type"": ""Button"",
+                    ""name"": ""SuctionRightHold"",
+                    ""type"": ""Value"",
                     ""id"": ""4a496ccf-7558-4f89-9c77-20a5df1c0f9b"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""interactions"": ""Hold(pressPoint=0.01)"",
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""MoveLeft"",
@@ -66,26 +66,48 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""b98191a0-10aa-4598-a9d8-797fa6a89ecd"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""name"": ""1D Axis"",
+                    ""id"": ""a7167bff-b917-4628-8309-31a9eecea92a"",
+                    ""path"": ""1DAxis(minValue=0)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SuctionLeft"",
-                    ""isComposite"": false,
+                    ""action"": ""SuctionLeftHold"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""4547a612-cfd3-4fe4-b621-755420362a6c"",
+                    ""name"": ""positive"",
+                    ""id"": ""2822b80e-0b2c-45b9-803f-0cce52599c1d"",
                     ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": ""Hold(duration=1.401298E-45)"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SuctionRight"",
+                    ""action"": ""SuctionLeftHold"",
                     ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""992ccd7f-a327-44b1-abec-f5f2a713ac9d"",
+                    ""path"": ""1DAxis(minValue=0)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SuctionRightHold"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""abdf27a6-0ac4-4c18-a4ce-38f3279f70e8"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SuctionRightHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -116,8 +138,8 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
 }");
         // gameplay
         m_gameplay = asset.FindActionMap("gameplay", throwIfNotFound: true);
-        m_gameplay_SuctionLeft = m_gameplay.FindAction("SuctionLeft", throwIfNotFound: true);
-        m_gameplay_SuctionRight = m_gameplay.FindAction("SuctionRight", throwIfNotFound: true);
+        m_gameplay_SuctionLeftHold = m_gameplay.FindAction("SuctionLeftHold", throwIfNotFound: true);
+        m_gameplay_SuctionRightHold = m_gameplay.FindAction("SuctionRightHold", throwIfNotFound: true);
         m_gameplay_MoveLeft = m_gameplay.FindAction("MoveLeft", throwIfNotFound: true);
         m_gameplay_MoveRight = m_gameplay.FindAction("MoveRight", throwIfNotFound: true);
     }
@@ -181,16 +203,16 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     // gameplay
     private readonly InputActionMap m_gameplay;
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
-    private readonly InputAction m_gameplay_SuctionLeft;
-    private readonly InputAction m_gameplay_SuctionRight;
+    private readonly InputAction m_gameplay_SuctionLeftHold;
+    private readonly InputAction m_gameplay_SuctionRightHold;
     private readonly InputAction m_gameplay_MoveLeft;
     private readonly InputAction m_gameplay_MoveRight;
     public struct GameplayActions
     {
         private @PlayerActions m_Wrapper;
         public GameplayActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @SuctionLeft => m_Wrapper.m_gameplay_SuctionLeft;
-        public InputAction @SuctionRight => m_Wrapper.m_gameplay_SuctionRight;
+        public InputAction @SuctionLeftHold => m_Wrapper.m_gameplay_SuctionLeftHold;
+        public InputAction @SuctionRightHold => m_Wrapper.m_gameplay_SuctionRightHold;
         public InputAction @MoveLeft => m_Wrapper.m_gameplay_MoveLeft;
         public InputAction @MoveRight => m_Wrapper.m_gameplay_MoveRight;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
@@ -202,12 +224,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_GameplayActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_GameplayActionsCallbackInterfaces.Add(instance);
-            @SuctionLeft.started += instance.OnSuctionLeft;
-            @SuctionLeft.performed += instance.OnSuctionLeft;
-            @SuctionLeft.canceled += instance.OnSuctionLeft;
-            @SuctionRight.started += instance.OnSuctionRight;
-            @SuctionRight.performed += instance.OnSuctionRight;
-            @SuctionRight.canceled += instance.OnSuctionRight;
+            @SuctionLeftHold.started += instance.OnSuctionLeftHold;
+            @SuctionLeftHold.performed += instance.OnSuctionLeftHold;
+            @SuctionLeftHold.canceled += instance.OnSuctionLeftHold;
+            @SuctionRightHold.started += instance.OnSuctionRightHold;
+            @SuctionRightHold.performed += instance.OnSuctionRightHold;
+            @SuctionRightHold.canceled += instance.OnSuctionRightHold;
             @MoveLeft.started += instance.OnMoveLeft;
             @MoveLeft.performed += instance.OnMoveLeft;
             @MoveLeft.canceled += instance.OnMoveLeft;
@@ -218,12 +240,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IGameplayActions instance)
         {
-            @SuctionLeft.started -= instance.OnSuctionLeft;
-            @SuctionLeft.performed -= instance.OnSuctionLeft;
-            @SuctionLeft.canceled -= instance.OnSuctionLeft;
-            @SuctionRight.started -= instance.OnSuctionRight;
-            @SuctionRight.performed -= instance.OnSuctionRight;
-            @SuctionRight.canceled -= instance.OnSuctionRight;
+            @SuctionLeftHold.started -= instance.OnSuctionLeftHold;
+            @SuctionLeftHold.performed -= instance.OnSuctionLeftHold;
+            @SuctionLeftHold.canceled -= instance.OnSuctionLeftHold;
+            @SuctionRightHold.started -= instance.OnSuctionRightHold;
+            @SuctionRightHold.performed -= instance.OnSuctionRightHold;
+            @SuctionRightHold.canceled -= instance.OnSuctionRightHold;
             @MoveLeft.started -= instance.OnMoveLeft;
             @MoveLeft.performed -= instance.OnMoveLeft;
             @MoveLeft.canceled -= instance.OnMoveLeft;
@@ -249,8 +271,8 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     public GameplayActions @gameplay => new GameplayActions(this);
     public interface IGameplayActions
     {
-        void OnSuctionLeft(InputAction.CallbackContext context);
-        void OnSuctionRight(InputAction.CallbackContext context);
+        void OnSuctionLeftHold(InputAction.CallbackContext context);
+        void OnSuctionRightHold(InputAction.CallbackContext context);
         void OnMoveLeft(InputAction.CallbackContext context);
         void OnMoveRight(InputAction.CallbackContext context);
     }

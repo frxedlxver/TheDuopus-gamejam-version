@@ -30,7 +30,7 @@ public class SpriteChanger : MonoBehaviour
         }
         else
         {
-            Debug.LogError("New sprite is not assigned. Please assign a sprite in the inspector.");
+            Debug.LogError("New suctionSprite is not assigned. Please assign a suctionSprite in the inspector.");
         }
     }
 }

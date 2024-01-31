@@ -3,33 +3,38 @@ using UnityEngine;
 public class Sucker : MonoBehaviour
 {
 
-    private Vector3 lockedLocalPos;
-    private SpriteRenderer sprite;
-    public Color c;
+    private SpriteRenderer suctionSprite;
+    public Color suctionPointColor;
 
     public Sucker OtherSucker;
+    public Vector2 SuckPosition = Vector2.zero;
+    public GameObject suctionPoint;
     public bool JustStartedSucking { get { return framesSinceStartedSucking < 3;  } }
     private int framesSinceStartedSucking = 0;
 
     public bool Sucking { get; private set; }
-    private bool touchingSuckable;
-    public GameObject touchedSuckable;
-    public bool CanSuck
+
+    private void Start()
     {
-        get { return touchingSuckable; }
-    }
-    public void Start()
-    {
-        sprite = GetComponent<SpriteRenderer>();
-        this.lockedLocalPos = this.transform.localPosition;
+        suctionSprite = suctionPoint.GetComponent<SpriteRenderer>();
+        suctionSprite.color = suctionPointColor;
+        suctionPoint.SetActive(false);
     }
 
-    public void Update()
+    private void Update()
     {
-        if (this.transform.localPosition != lockedLocalPos)
-        {
-            this.transform.localPosition = lockedLocalPos;
-        }
+        suctionSprite.color = suctionPointColor;
+    }
+    public bool TouchingSuckable
+    {
+        get { return TouchedSuckable != null; }
+    }
+    public GameObject TouchedSuckable;
+
+    // this is the same as Touching suckable, but here because we plan to add stamina. 
+    public bool CanSuck
+    {
+        get { return TouchingSuckable; }
     }
 
     public void FixedUpdate() {
@@ -43,31 +48,41 @@ public class Sucker : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("terrain"))
         {
-            touchedSuckable = collision.gameObject;
-            touchingSuckable = true;
+            TouchedSuckable = collision.gameObject;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         
-        if (touchedSuckable != null && collision.gameObject == touchedSuckable)
+        if (TouchingSuckable && collision.gameObject == TouchedSuckable)
         {
-            touchedSuckable = null;
-            touchingSuckable = false;
+            TouchedSuckable = null;
         }
     }
 
     public void Suck()
     {
-        framesSinceStartedSucking = 0;
-        Sucking = true;
-        sprite.enabled = true;
+        if (TouchingSuckable)
+        {
+            suctionPoint.transform.parent = TouchedSuckable.transform;
+            suctionPoint.transform.position = this.transform.position;
+            suctionPoint.SetActive(true);
+            framesSinceStartedSucking = 0;
+            Sucking = true;
+        }
+
     }
 
     public void StopSucking()
     {
-        Sucking = false;
-        sprite.enabled = false;
+        if (Sucking)
+        {
+            suctionPoint.transform.parent = this.transform;
+            suctionPoint.SetActive(false);
+            suctionPoint.transform.position = this.transform.position;
+            Sucking = false;
+        }
+
     }
 }

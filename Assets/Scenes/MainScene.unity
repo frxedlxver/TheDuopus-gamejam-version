@@ -14930,7 +14930,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 235e35f2fc9a7ec40821152722a5348b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingPlatform: {fileID: 945018872}
 --- !u!114 &945018872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14943,14 +14942,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11aceb3f32bcd641ad3aa8a65d911c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Path: {fileID: 1763506737}
-  Platform: {fileID: 1740911991}
-  MoveSpeed: 60
-  RotationSpeed: 30
-  curPoint: {fileID: 0}
-  nextPoint: {fileID: 0}
-  isRotating: 0
-  platformRigidbody: {fileID: 0}
 --- !u!1 &972262894 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6380997237034928460, guid: f02290f589afc1e458d42005954bd5a7, type: 3}
@@ -15740,7 +15731,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf87c7b4ac4992e449e098e1d874cf1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 1763506737}
 --- !u!1001 &1168244512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18869,104 +18859,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292bb9dd4d952584abd1b34085dde88a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathPoints:
-  - {fileID: 1835005161}
-  - {fileID: 2128366103}
-  - {fileID: 1135912010}
-  DrawPoints: 1
-  DrawLines: 1
-  DrawPointNumbers: 1
-  style:
-    m_Name: 
-    m_Normal: {m_Background: {fileID: 0}, m_ScaledBackgrounds: []
-, m_TextColor:
-        r: 0
-        g: 0
-        b: 0
-        a: 1
-}
-    m_Hover: {m_Background: {fileID: 0}, m_ScaledBackgrounds: []
-, m_TextColor:
-        r: 0
-        g: 0
-        b: 0
-        a: 1
-}
-    m_Active: {m_Background: {fileID: 0}, m_ScaledBackgrounds: []
-, m_TextColor:
-        r: 0
-        g: 0
-        b: 0
-        a: 1
-}
-    m_Focused: {m_Background: {fileID: 0}, m_ScaledBackgrounds: []
-, m_TextColor:
-        r: 0
-        g: 0
-        b: 0
-        a: 1
-}
-    m_OnNormal: {m_Background: {fileID: 0}, m_ScaledBackgrounds: []
-, m_TextColor:
-        r: 0
-        g: 0
-        b: 0
-        a: 1
-}
-    m_OnHover: {m_Background: {fileID: 0}, m_ScaledBackgrounds: []
-, m_TextColor:
-        r: 0
-        g: 0
-        b: 0
-        a: 1
-}
-    m_OnActive: {m_Background: {fileID: 0}, m_ScaledBackgrounds: []
-, m_TextColor:
-        r: 0
-        g: 0
-        b: 0
-        a: 1
-}
-    m_OnFocused: {m_Background: {fileID: 0}, m_ScaledBackgrounds: []
-, m_TextColor:
-        r: 0
-        g: 0
-        b: 0
-        a: 1
-}
-    m_Border:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    m_Margin:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    m_Padding:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    m_Overflow:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    m_Font: {fileID: 0}
-    m_FontSize: 18
-    m_FontStyle: 1
-    m_Alignment: 0
-    m_WordWrap: 0
-    m_RichText: 1
-    m_TextClipping: 0
-    m_ImagePosition: 0
-    m_ContentOffset: {x: 0, y: 0}
-    m_FixedWidth: 0
-    m_FixedHeight: 0
-    m_StretchWidth: 1
-    m_StretchHeight: 0
 --- !u!1001 &1765978109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19831,7 +19723,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf87c7b4ac4992e449e098e1d874cf1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 1763506737}
 --- !u!60 &1836031488 stripped
 PolygonCollider2D:
   m_CorrespondingSourceObject: {fileID: 8326763395587650118, guid: 93fe653ddfba1ca4e82db23ed0f52658, type: 3}
@@ -20555,7 +20446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf87c7b4ac4992e449e098e1d874cf1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 1763506737}
 --- !u!1001 &2134617290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21203,6 +21093,22 @@ PrefabInstance:
       propertyPath: suctionPoint
       value: 
       objectReference: {fileID: 1633343289}
+    - target: {fileID: 5877704402397933895, guid: f02290f589afc1e458d42005954bd5a7, type: 3}
+      propertyPath: suctionPointColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877704402397933895, guid: f02290f589afc1e458d42005954bd5a7, type: 3}
+      propertyPath: suctionPointColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877704402397933895, guid: f02290f589afc1e458d42005954bd5a7, type: 3}
+      propertyPath: suctionPointColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877704402397933895, guid: f02290f589afc1e458d42005954bd5a7, type: 3}
+      propertyPath: suctionPointColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6039234455874445066, guid: f02290f589afc1e458d42005954bd5a7, type: 3}
       propertyPath: m_Distance
       value: 9.2836895
@@ -21275,6 +21181,10 @@ PrefabInstance:
       propertyPath: suctionPoint
       value: 
       objectReference: {fileID: 1790096234}
+    - target: {fileID: 6990551729543064486, guid: f02290f589afc1e458d42005954bd5a7, type: 3}
+      propertyPath: suctionPointColor.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6990551729543064486, guid: f02290f589afc1e458d42005954bd5a7, type: 3}
       propertyPath: suctionPointColor.b
       value: 0.70980394

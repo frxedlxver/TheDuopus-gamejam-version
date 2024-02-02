@@ -5,12 +5,12 @@ using UnityEngine;
 [ExecuteAlways]
 public class PathPoint : MonoBehaviour
 {
-    public PlatformPath parent;
+    public PlatformPathEditorOnly parent;
 
     [ExecuteAlways]
     private void OnEnable()
     {
-        parent = GetComponentInParent<PlatformPath>();
+        parent = GetComponentInParent<PlatformPathEditorOnly>();
         parent.UpdatePathPoints();
     }
 

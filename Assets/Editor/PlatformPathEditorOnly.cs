@@ -7,9 +7,9 @@ using UnityEditor;
 using UnityEngine;
 
 [ExecuteAlways]
-public class PlatformPath : MonoBehaviour
+public class PlatformPathEditorOnly : MonoBehaviour
 {
-    public List<Transform> pathPoints;
+    public PlatformPath platformPath;
 
     public bool DrawPoints;
     public bool DrawLines;
@@ -32,11 +32,11 @@ public class PlatformPath : MonoBehaviour
     private void OnDrawGizmos()
     {
 
-        for (int i = 0; i < pathPoints.Count; i++)
+        for (int i = 0; i < platformPath.pathPoints.Count; i++)
         {
 
 
-            Transform curPoint = pathPoints[i];
+            Transform curPoint = platformPath.pathPoints[i];
 
             if (DrawPoints)
             {
@@ -48,7 +48,7 @@ public class PlatformPath : MonoBehaviour
             if (DrawLines)
             {
                     
-                Transform nextPoint = i < pathPoints.Count - 1 ? pathPoints[i + 1] : pathPoints[0];
+                Transform nextPoint = i < platformPath.pathPoints.Count - 1 ? platformPath.pathPoints[i + 1] : platformPath.pathPoints[0];
 
                 Handles.color = Color.white;
                 Handles.DrawLine(curPoint.position, nextPoint.position);
@@ -69,15 +69,6 @@ public class PlatformPath : MonoBehaviour
     [ExecuteAlways]
     public void UpdatePathPoints()
     {
-        pathPoints = GetComponentsInChildren<Transform>().ToList();
-        pathPoints.Remove(this.transform);
-    }
-
-    internal Transform GetNextPoint(Transform curPoint)
-    {
-        if (curPoint == null) return pathPoints[0];
-
-        int curPointIdx = pathPoints.IndexOf(curPoint);
-        return curPointIdx == pathPoints.Count - 1 ? pathPoints[0] : pathPoints[curPointIdx + 1];
+        platformPath.UpdatePathPoints();
     }
 }

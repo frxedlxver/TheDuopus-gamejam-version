@@ -33,7 +33,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""id"": ""d0d88984-ccae-4f64-bc94-2a14783a9440"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -42,7 +42,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""id"": ""4a496ccf-7558-4f89-9c77-20a5df1c0f9b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -67,9 +67,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""5b268bf8-f377-427b-a98b-8c416728b50a"",
+                    ""id"": ""b98191a0-10aa-4598-a9d8-797fa6a89ecd"",
                     ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SuctionLeft"",
@@ -78,9 +78,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6aa2f977-7bdf-4640-8a10-25eb5ff11991"",
+                    ""id"": ""4547a612-cfd3-4fe4-b621-755420362a6c"",
                     ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SuctionRight"",

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 public class Sucker : MonoBehaviour
@@ -10,14 +7,17 @@ public class Sucker : MonoBehaviour
     private SpriteRenderer sprite;
     public Color c;
 
+    public Sucker OtherSucker;
+    public bool JustStartedSucking { get { return framesSinceStartedSucking < 3;  } }
+    private int framesSinceStartedSucking = 0;
+
     public bool Sucking { get; private set; }
     private bool touchingSuckable;
+    public GameObject touchedSuckable;
     public bool CanSuck
     {
-        get { return touchingSuckable && curStamina > 0; }
+        get { return touchingSuckable; }
     }
-    public float maxStamina;
-    public float curStamina { get; private set; }
     public void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -26,49 +26,48 @@ public class Sucker : MonoBehaviour
 
     public void Update()
     {
-        if (Sucking)
-        {
-            curStamina = curStamina - Time.deltaTime;
-        } 
-        else
-        {
-            curStamina = Mathf.Max(curStamina + Time.deltaTime, maxStamina);
-        }
-
-        Debug.Log(this.gameObject.name + " stamina: " + curStamina.ToString());
         if (this.transform.localPosition != lockedLocalPos)
         {
             this.transform.localPosition = lockedLocalPos;
         }
     }
 
+    public void FixedUpdate() {
+        if (framesSinceStartedSucking < 3 )
+        {
+            framesSinceStartedSucking++;
+        }
+    }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        sprite.enabled = true;
         if (collision.gameObject.layer == LayerMask.NameToLayer("terrain"))
         {
+            touchedSuckable = collision.gameObject;
             touchingSuckable = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        sprite.enabled = false;
-        if (collision.gameObject.layer == LayerMask.NameToLayer("terrain"))
+        
+        if (touchedSuckable != null && collision.gameObject == touchedSuckable)
         {
+            touchedSuckable = null;
             touchingSuckable = false;
         }
     }
 
     public void Suck()
     {
+        framesSinceStartedSucking = 0;
         Sucking = true;
-        sprite.color = new Color(c.r, c.g, c.b, 1);
+        sprite.enabled = true;
     }
 
     public void StopSucking()
     {
         Sucking = false;
-        sprite.color = new Color(c.r, c.g, c.b, 0.15f);
+        sprite.enabled = false;
     }
 }

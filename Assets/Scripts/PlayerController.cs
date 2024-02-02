@@ -1,98 +1,115 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
-    
-    [SerializeField] private Rigidbody2D leftRb;
-    [SerializeField] private Rigidbody2D rightRb;
-    [SerializeField] private Rigidbody2D centerRb;
+    [SerializeField] public Rigidbody2D leftRb;
+    [SerializeField] public Rigidbody2D rightRb;
+    [SerializeField] public Rigidbody2D centerRb;
 
-    private PlayerInput _input;
-
+    public PlayerInput _input;
 
     public Sucker L_sucker;
-    private Vector2 L_suckerPos;
-    private bool L_sucked;
+    public Vector2 L_suckerPos;
+    public bool L_sucked;
     public Sucker R_sucker;
-    private Vector2 R_suckerPos;
-    private bool R_sucked;
+    public Vector2 R_suckerPos;
+
+    public Transform L_effector;
+    public Transform R_effector;
+
+    public bool R_sucked;
     public float headForceFactor = 10f;
     public float maxHeadForce = 50f;
     public float tentacleForce = 50f;
     public float range = 10f;
+    public float suctionBreakDistance = 0.5f;
 
     public float staminaSeconds = 10f;
-
 
     public Transform tipL;
     public Transform baseL;
     public Transform tipR;
     public Transform baseR;
 
-
     public float tentacleGravity = 6f;
     public float headGravity = 8f;
 
-    private void Start()
+    public void Start()
     {
         _input = gameObject.GetComponent<PlayerInput>();
-        L_sucker.maxStamina = staminaSeconds;
-        R_sucker.maxStamina = staminaSeconds;
+        L_sucker.OtherSucker = R_sucker;
+        R_sucker.OtherSucker = L_sucker;
     }
 
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
-        HandleSucker(_input.SuctionLeftHeld, L_sucker, _input.MoveLeftValue, tipL, baseL, leftRb, ref L_suckerPos, ref L_sucked);
-        HandleSucker(_input.SuctionRightHeld, R_sucker, _input.MoveRightValue, tipR, baseR, rightRb, ref R_suckerPos, ref R_sucked);
+        HandleSucker(_input.SuctionLeftHeld, _input.SuctionLeftPressed, L_sucker, L_effector, _input.MoveLeftValue, tipL, baseL, leftRb, ref L_suckerPos, ref L_sucked);
+        HandleSucker(_input.SuctionRightHeld, _input.SuctionRightPressed, R_sucker, R_effector, _input.MoveRightValue, tipR, baseR, rightRb, ref R_suckerPos, ref R_sucked);
 
-        if ((R_sucked && _input.MoveLeftValue != Vector2.zero) || L_sucked && _input.MoveRightValue != Vector2.zero)
+        if ((R_sucked && _input.MoveLeftValue != Vector2.zero) || (L_sucked && _input.MoveRightValue != Vector2.zero))
         {
             centerRb.gravityScale = 0;
-            Vector2 headTargetPos = (R_sucker.transform.position + L_sucker.transform.position) / 2;
-            Vector2 forceDirection = headTargetPos - centerRb.position;
-            float distance = forceDirection.magnitude;
+            Vector2 headTargetPos = (leftRb.transform.position + rightRb.transform.position) / 2;
+            Vector2 newPosition = Vector2.MoveTowards(centerRb.position, headTargetPos, maxHeadForce * Time.fixedDeltaTime);
 
-            // Scale the force based on distance (with damping and force limit)
-            float forceScale = Mathf.Min(distance * headForceFactor, maxHeadForce);
-            forceDirection = forceDirection.normalized * forceScale;
-
-            centerRb.AddForce(forceDirection);
-        } else
+            centerRb.MovePosition(newPosition);
+        }
+        else
         {
             centerRb.gravityScale = headGravity;
         }
     }
 
-    private void HandleSucker(bool suctionHeld, Sucker sucker, Vector2 moveValue, Transform tip, Transform baseT, Rigidbody2D rb, ref Vector2 suckerPos, ref bool sucked)
+    public void HandleSucker(bool suctionHeld, bool suctionPressed, Sucker sucker, Transform effector, Vector2 moveValue, Transform target, Transform baseT, Rigidbody2D rb, ref Vector2 lockedPosition, ref bool sucked)
     {
-        if (suctionHeld && sucker.CanSuck)
+        if (suctionPressed && sucker.CanSuck && !sucked)
         {
-            if (sucked)
+            GameObject touchedSuckable = sucker.touchedSuckable;
+            if (touchedSuckable != null)
             {
-                sucker.transform.position = suckerPos;
-            }
-            else
-            {
-                suckerPos = sucker.transform.position;
-                sucker.Suck();
                 sucked = true;
+                sucker.Suck();
+                // Calculate the position of the sucker, local to touchedSuckable
+                lockedPosition = touchedSuckable.transform.InverseTransformPoint(sucker.transform.position);
             }
         }
-        else
+
+        if (sucked)
+        { 
+            GameObject touchedSuckable = sucker.touchedSuckable;
+            if (touchedSuckable != null)
+            {
+                // Calculate the current world position of the locked position
+                Vector2 currentLockedWorldPosition = touchedSuckable.transform.TransformPoint(lockedPosition);
+                bool maxSuctionDistanceExceeded = Vector2.Distance(sucker.transform.position, currentLockedWorldPosition) > suctionBreakDistance;
+
+                if (sucker.OtherSucker.JustStartedSucking || maxSuctionDistanceExceeded || !suctionHeld)
+                {
+                    sucked = false;
+                    sucker.StopSucking();
+                }
+                else
+                {
+                    // Move the sucker towards the current world position of the locked position
+                    rb.MovePosition(currentLockedWorldPosition);
+                }
+            } else
+            {
+                sucked = false;
+                sucker.StopSucking();
+            }
+
+        }
+
+        if (!sucked)
         {
-            sucked = false;
-            sucker.StopSucking();
-            PlaceTip(moveValue, tip, baseT, rb);
+            PlaceTip(moveValue, target, baseT, rb);
         }
     }
 
+
     public void PlaceTip(Vector2 input, Transform tip, Transform baseT, Rigidbody2D rb)
     {
-
         if (input == Vector2.zero)
         {
             rb.gravityScale = tentacleGravity;
@@ -102,12 +119,9 @@ public class PlayerController : MonoBehaviour
             rb.gravityScale = 0;
             Vector2 targetOffset = input * range;
             Vector2 targetPosition = (Vector2)baseT.position + targetOffset;
-            Vector2 forceDirection = targetPosition - rb.position;
+            Vector2 newPosition = Vector2.MoveTowards(rb.position, targetPosition, tentacleForce * Time.fixedDeltaTime);
 
-            // Apply a force towards the target position
-            rb.AddForce(forceDirection.normalized * tentacleForce, ForceMode2D.Force);
+            rb.MovePosition(newPosition);
         }
     }
-
-
 }
